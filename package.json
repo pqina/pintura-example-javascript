@@ -1,0 +1,18 @@
+{
+    "private": true,
+    "name": "pintura-example-javascript",
+    "version": "0.0.1",
+    "description": "A Pintura JavaScript Example Project",
+    "main": "index.js",
+    "scripts": {
+        "start": "npx http-server"
+    },
+    "author": "Rik Schennink at PQINA",
+    "license": "https://pqina.nl/pintura/license/",
+    "dependencies": {
+        "@pqina/pintura": "^8.57.5"
+    },
+    "devDependencies": {
+        "http-server": "^14.1.1"
+    }
+}

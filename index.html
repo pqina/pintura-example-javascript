@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Pintura JavaScript example project</title>
+        <link
+            rel="stylesheet"
+            href="./node_modules/@pqina/pintura/pintura.css"
+        />
+        <style>
+            html {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI',
+                    Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji',
+                    'Segoe UI Emoji', 'Segoe UI Symbol';
+                font-size: 16px;
+                line-height: 1.5;
+            }
+
+            body {
+                padding: 1em;
+            }
+
+            img {
+                max-width: 100%;
+            }
+
+            /* bright / dark mode */
+            .pintura-editor {
+                --color-background: 255, 255, 255;
+                --color-foreground: 10, 10, 10;
+            }
+
+            @media (prefers-color-scheme: dark) {
+                html {
+                    color: #fff;
+                    background: #111;
+                }
+
+                .pintura-editor {
+                    --color-background: 10, 10, 10;
+                    --color-foreground: 255, 255, 255;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Pintura Image Editor</h1>
+
+        <h2>In page</h2>
+        <div class="inline-editor" style="width: 800px; height: 600px"></div>
+        <p><img class="inline-result" src="" alt="" /></p>
+
+        <h2>Modal</h2>
+        <p><button class="modal-button">Open editor</button></p>
+        <p><img class="modal-result" src="" alt="" /></p>
+
+        <h2>Overlay</h2>
+        <p>
+            <button class="overlay-button" data-action="open">
+                Open editor
+            </button>
+        </p>
+        <p>
+            <button
+                class="overlay-button"
+                data-action="close"
+                style="display: none"
+            >
+                Close editor
+            </button>
+        </p>
+        <p>
+            <img class="overlay-result" width="512" src="image.jpeg" alt="" />
+        </p>
+        <div
+            class="overlay-editor"
+            style="display: none; width: 512px; height: 256px"
+        ></div>
+
+        <script type="module">
+            import {
+                appendDefaultEditor,
+                openDefaultEditor,
+                overlayDefaultEditor,
+            } from './node_modules/@pqina/pintura/pintura.js';
+
+            {
+                const editor = appendDefaultEditor('.inline-editor', {
+                    src: './image.jpeg',
+                    stickers: [
+                        ['Emoji', ['⭐️', '😊', '👍', '👎', '☀️', '🌤', '🌥']],
+                        [
+                            'Markers',
+                            [
+                                {
+                                    src: 'sticker-one.svg',
+                                    width: '5%',
+                                    alt: 'One',
+                                },
+                                {
+                                    src: 'sticker-two.svg',
+                                    width: '5%',
+                                    alt: 'Two',
+                                },
+                                {
+                                    src: 'sticker-three.svg',
+                                    width: '5%',
+                                    alt: 'Three',
+                                },
+                            ],
+                        ],
+                    ],
+                });
+
+                editor.on('load', (res) => console.log('inline result', res));
+
+                editor.on('process', (res) =>
+                    document
+                        .querySelector('.inline-result')
+                        .setAttribute('src', URL.createObjectURL(res.dest))
+                );
+            }
+
+            // modal
+            document
+                .querySelector('.modal-button')
+                .addEventListener('click', () => {
+                    const editor = openDefaultEditor({
+                        src: './image.jpeg',
+                        stickers: [
+                            [
+                                'Emoji',
+                                ['⭐️', '😊', '👍', '👎', '☀️', '🌤', '🌥'],
+                            ],
+                            [
+                                'Markers',
+                                [
+                                    {
+                                        src: 'sticker-one.svg',
+                                        width: '5%',
+                                        alt: 'One',
+                                    },
+                                    {
+                                        src: 'sticker-two.svg',
+                                        width: '5%',
+                                        alt: 'Two',
+                                    },
+                                    {
+                                        src: 'sticker-three.svg',
+                                        width: '5%',
+                                        alt: 'Three',
+                                    },
+                                ],
+                            ],
+                        ],
+                    });
+
+                    editor.on('load', (res) =>
+                        console.log('modal result', res)
+                    );
+
+                    editor.on('process', (res) =>
+                        document
+                            .querySelector('.modal-result')
+                            .setAttribute('src', URL.createObjectURL(res.dest))
+                    );
+                });
+
+            // overlay
+            {
+                let editor;
+                let imageState;
+
+                document
+                    .querySelector('.overlay-button[data-action="open"]')
+                    .addEventListener('click', () => {
+                        // hide result and show the editor
+                        document.querySelector(
+                            '.overlay-result'
+                        ).style.display = 'none';
+                        document.querySelector(
+                            '.overlay-editor'
+                        ).style.display = '';
+                        document.querySelector(
+                            '.overlay-button[data-action=open]'
+                        ).style.display = 'none';
+                        document.querySelector(
+                            '.overlay-button[data-action=close]'
+                        ).style.display = '';
+
+                        // append overlay editor
+                        editor = overlayDefaultEditor('.overlay-editor', {
+                            src: './image.jpeg',
+
+                            // current image state
+                            imageState: imageState,
+                        });
+
+                        editor.on('process', (res) => {
+                            // new image state, so we can re-edit with previous state
+                            imageState = res.imageState;
+
+                            // show the edit result
+                            document
+                                .querySelector('.overlay-result')
+                                .setAttribute(
+                                    'src',
+                                    URL.createObjectURL(res.dest)
+                                );
+                            document.querySelector(
+                                '.overlay-result'
+                            ).style.display = '';
+
+                            // remove the editor
+                            editor.destroy();
+                            editor = undefined;
+                            document.querySelector(
+                                '.overlay-editor'
+                            ).style.display = 'none';
+
+                            document.querySelector(
+                                '.overlay-button[data-action=open]'
+                            ).style.display = '';
+                            document.querySelector(
+                                '.overlay-button[data-action=close]'
+                            ).style.display = 'none';
+                        });
+                    });
+
+                document
+                    .querySelector('.overlay-button[data-action="close"]')
+                    .addEventListener('click', () => {
+                        // remove the editor if it's been defined
+                        if (!editor) return;
+
+                        editor.destroy();
+                        editor = undefined;
+
+                        // hide the editor and show the result
+                        document.querySelector(
+                            '.overlay-result'
+                        ).style.display = '';
+
+                        document.querySelector(
+                            '.overlay-editor'
+                        ).style.display = 'none';
+
+                        document.querySelector(
+                            '.overlay-button[data-action=open]'
+                        ).style.display = '';
+
+                        document.querySelector(
+                            '.overlay-button[data-action=close]'
+                        ).style.display = 'none';
+                    });
+            }
+        </script>
+    </body>
+</html>
