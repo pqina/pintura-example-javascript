@@ -1,7 +1,7 @@
 {
     "private": true,
     "name": "pintura-example-javascript",
-    "version": "0.0.1",
+    "version": "0.0.0",
     "description": "A Pintura JavaScript Example Project",
     "main": "index.js",
     "scripts": {
