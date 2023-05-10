@@ -6,7 +6,7 @@ This version of Pintura will show a watermark in the editor and on generated ima
 
 Purchase a license at https://pqina.nl/pintura to use Pintura in production.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/pqina/pintura-example-javascript?title='Pintura JavaScript example project'&file=index.html)
+[Open project in StackBlitz](https://stackblitz.com/github/pqina/pintura-example-javascript?file=index.html)
 
 ## Installation
 
