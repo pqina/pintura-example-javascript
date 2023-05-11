@@ -4,6 +4,8 @@ Install `@pqina/pintura` and a local node server by running `npm install`, then 
 
 Or try it out right now and [open the project on StackBlitz](https://stackblitz.com/github/pqina/pintura-example-javascript?file=index.html)
 
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/pqina/pintura-example-javascript?file=index.html)
+
 ### License
 
 This projects uses a test version of Pintura. This version of Pintura will show a watermark in the editor and on generated images.
