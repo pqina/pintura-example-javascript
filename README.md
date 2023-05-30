@@ -2,8 +2,6 @@
 
 Install `@pqina/pintura` and a local node server by running `npm install`, then run `npm start` to start the server on localhost.
 
-Or try it out right now and [open the project on StackBlitz](https://stackblitz.com/github/pqina/pintura-example-javascript?file=index.html)
-
 [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/pqina/pintura-example-javascript?file=index.html)
 
 ### License
