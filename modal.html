@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Pintura JavaScript example project</title>
+        <link
+            rel="stylesheet"
+            href="./node_modules/@pqina/pintura/pintura.css"
+        />
+        <link rel="stylesheet" href="./styles.css" />
+    </head>
+    <body>
+        <h1>Pintura Image Editor</h1>
+
+        <ul>
+            <li><a href="/index.html">Append</a></li>
+            <li><a href="/modal.html">Modal</a></li>
+            <li><a href="/overlay.html">Overlay</a></li>
+        </ul>
+
+        <h2>Modal</h2>
+        <p><button class="modal-button">Open editor</button></p>
+        <p><img class="modal-result" src="" alt="" /></p>
+
+        <script type="module">
+            import { openDefaultEditor } from './node_modules/@pqina/pintura/pintura.js';
+
+            // modal
+            document
+                .querySelector('.modal-button')
+                .addEventListener('click', () => {
+                    const editor = openDefaultEditor({
+                        src: './image.jpeg',
+                        stickers: [
+                            [
+                                'Emoji',
+                                ['⭐️', '😊', '👍', '👎', '☀️', '🌤', '🌥'],
+                            ],
+                            [
+                                'Markers',
+                                [
+                                    {
+                                        src: 'sticker-one.svg',
+                                        width: '5%',
+                                        alt: 'One',
+                                    },
+                                    {
+                                        src: 'sticker-two.svg',
+                                        width: '5%',
+                                        alt: 'Two',
+                                    },
+                                    {
+                                        src: 'sticker-three.svg',
+                                        width: '5%',
+                                        alt: 'Three',
+                                    },
+                                ],
+                            ],
+                        ],
+                    });
+
+                    editor.on('load', (res) =>
+                        console.log('modal result', res)
+                    );
+
+                    editor.on('process', (res) =>
+                        document
+                            .querySelector('.modal-result')
+                            .setAttribute('src', URL.createObjectURL(res.dest))
+                    );
+                });
+        </script>
+    </body>
+</html>
