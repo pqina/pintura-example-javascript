@@ -11,7 +11,7 @@
         "start": "npx http-server"
     },
     "dependencies": {
-        "@pqina/pintura": "^8.*"
+        "@pqina/pintura": "^8.68.0"
     },
     "devDependencies": {
         "http-server": "^14.1.1"
