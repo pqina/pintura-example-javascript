@@ -8,8 +8,7 @@
     "description": "A Pintura JavaScript example Project",
     "main": "index.js",
     "scripts": {
-        "start": "npx http-server",
-        "postinstall": "npm install @pqina/pintura@8.x"
+        "start": "npx http-server"
     },
     "dependencies": {
         "@pqina/pintura": "^8.x"

@@ -1,0 +1,3 @@
+{
+    "startCommand": "npm install @pqina/pintura@8.x && npm start"
+}
