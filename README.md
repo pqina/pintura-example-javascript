@@ -1,4 +1,4 @@
-# Pintura JavaScript example project
+# JavaScript Image Editor with Pintura example project
 
 ## Demo
 
@@ -8,7 +8,7 @@
 
 If it's not already installed we need to install [Node.js](https://nodejs.org)
 
-Then we [install the project dependencies](https://nodejs.dev/en/learn/an-introduction-to-the-npm-package-manager/#introduction-to-npm) by running `npm install` in a terminal window. This will install `@pqina/pintura`, `@pqina/pintura-input`, and a local node server.
+Then we [install the project dependencies](https://nodejs.dev/en/learn/an-introduction-to-the-npm-package-manager/#introduction-to-npm) by running `npm install` in a terminal window. This will install `@pqina/pintura` and a local node server.
 
 Run `npm start` to start a local test server at [http://localhost:8080](http://localhost:8080)
 
@@ -27,6 +27,7 @@ JavaScript:
 Frameworks:
 
 -   [jQuery](https://github.com/pqina/pintura-example-jquery)
+-   [Alpine](https://github.com/pqina/pintura-example-alpine)
 -   [Angular](https://github.com/pqina/pintura-example-angular)
 -   [Vue 2](https://github.com/pqina/pintura-example-vue-2)
 -   [Vue 3](https://github.com/pqina/pintura-example-vue-3)
