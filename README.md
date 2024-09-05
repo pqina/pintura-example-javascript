@@ -6,11 +6,20 @@
 
 ## Installation
 
+### NodeJS
+
 If it's not already installed we need to install [Node.js](https://nodejs.org)
 
 Then we [install the project dependencies](https://nodejs.dev/en/learn/an-introduction-to-the-npm-package-manager/#introduction-to-npm) by running `npm install` in a terminal window. This will install `@pqina/pintura` and a local node server.
 
 Run `npm start` to start a local test server at [http://localhost:8080](http://localhost:8080)
+
+### Manually
+
+1. Download the [Pintura package](https://pqina.nl/pintura/guide/#zip-panel).
+2. We only need the `pintura.css` stylesheet and the `pintura.js` JavaScript file.
+3. Update the url after the `import` statement so it points to the downloaded JavaScript file.
+4. Update the stylesheet tag so it links to the downloaded Pintura stylesheet file.
 
 ## Questions
 
